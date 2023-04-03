@@ -1,0 +1,22 @@
+<center>
+    <h3><%=header%></h3>
+    <hr>
+    <div>
+       <table border="1px" style="border-collapse: collapse; width: 60%;">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        <% items.forEach(function(user){ %>
+            <tr>
+                <td><%= user._id %></td>
+                <td style="color: blue;"><%= user.name %></td>
+                <td><%= user.email%></td>
+            </tr>
+          <% }); %>
+       </table>
+    </div>
+    <hr>
+    <a href="/">Back to Home</a>
+</center>

@@ -20,10 +20,10 @@ const registerSchema = new mongoose.Schema({
     }
 });
 
-const User = mongoose.model('visitor', registerSchema);
+const User = mongoose.model('User', registerSchema);
 
 app.get('/', (req, res)=>{
-    res.render('home');
+    res.render('home', {title: "Welcome To Our Cameroon's Citizen Database System", signature: 'made with ❤ by gracify technologies'});
 })
 
 app.get('/register', (req, res)=>{
@@ -35,8 +35,16 @@ app.post ('/', (req, res)=>{
     const newUser = new User ({name, email});
     newUser.save()
     .then (console.log('new user saved'))
-    res.redirect('/')
+    res.redirect('/users')
 })
+
+app.get ('/users', (req, res) =>{
+    User.find().sort({"_id":-1})
+    .then(function(doc){
+        res.render('users', {items: doc, header: "Registered Users"});
+    })
+})
+
 
 app.listen (3000, ()=>{
     console.log('server running on port 3000');
